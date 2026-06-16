@@ -1,26 +1,32 @@
 class Solution {
     public int romanToInt(String s) {
-        int[] arr=new int[27];
+        int total=0;
+       for( int i=0; i< s.length(); i++){
+          int current = valueOfChar(s.charAt(i));
+           
+           if( i< s.length()-1  && current < valueOfChar(s.charAt(i+1))  ){
+            total -= current;
+           }
+           else{
+            total += current;
+           }
+       }
+        return total;
+    }
+
+
+    private int valueOfChar(char c){
+
+        switch (c) {
+            case 'I': return 1;
+            case 'V': return 5;
+            case 'X': return 10;
+            case 'L': return 50;
+            case 'C': return 100;
+            case 'D': return 500;
+            case 'M': return 1000; 
+            default: return 0;
+        }
         
-        arr['I'-'A']=1;
-        arr['V'-'A']=5;
-        arr['X'-'A']=10;
-        arr['L'-'A']=50;
-        arr['C'-'A']=100;
-        arr['D'-'A']=500;
-        arr['M'-'A']=1000;
-        int lidx=s.charAt(s.length()-1);
-        int sidx=s.charAt(0);
-        int sum=0;
-         for(int i=0;i<s.length();i++){
-            if(i+1<s.length() && arr[s.charAt(i)-'A']<arr[s.charAt(i+1)-'A']){
-                sum-=arr[s.charAt(i)-'A'];
-            }
-            else{
-                sum+=arr[s.charAt(i)-'A'];
-            }
-         }
-       
-    return sum;
     }
 }
